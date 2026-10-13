@@ -1,11 +1,15 @@
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView
 
+from tasks.forms import TaskForm
 from tasks.models import Task
 
 
-# Create your views here.
-
-class ListTasksView(ListView):
+class ListTaskView(ListView):
     model = Task
+
+
+class CreateTaskView(CreateView):
+    model = Task
+    form_class = TaskForm
+    success_url = reverse_lazy("tasks:task-list")
