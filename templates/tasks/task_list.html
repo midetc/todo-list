@@ -24,7 +24,7 @@
           Deadline: {{ task.deadline|date:"F j, Y, g:i a" }}
         </p>
       {% endif %}
-      <p class="text-secondary mb-1">
+      <div class="text-secondary mb-1">
         Tags:
         {% for tag in task.tags.all %}
           {{ tag.name }}
@@ -33,7 +33,13 @@
         {% endfor %}
         <a href="{% url 'tasks:task-update' task.pk %}">Update</a>
         <a href="{% url 'tasks:task-delete' task.pk %}">Delete</a>
-      </p>
+        <form method="post" action="{% url 'tasks:task-toggle' task.pk %}" class="d-inline">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-link p-0 align-baseline">
+            {% if task.done %}Undo{% else %}Complete{% endif %}
+          </button>
+        </form>
+      </div>
     </article>
   {% empty %}
     <p>No tasks yet.</p>

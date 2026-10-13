@@ -1,6 +1,6 @@
 from django import forms
 
-from tasks.models import Task
+from tasks.models import Tag, Task
 
 
 class TaskForm(forms.ModelForm):
@@ -13,3 +13,9 @@ class TaskForm(forms.ModelForm):
                 format="%Y-%m-%dT%H:%M",
             ),
         }
+
+
+class TagForm(forms.ModelForm):
+    class Meta:
+        model = Tag
+        fields = ["name"]

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Tags
+{% endblock %}
+
+{% block content %}
+  <h1>Tags <a href="{% url 'tasks:tag-create' %}" class="btn btn-primary">Add</a></h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tag in tag_list %}
+        <tr>
+          <td>{{ tag.name }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td>No tags yet.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
