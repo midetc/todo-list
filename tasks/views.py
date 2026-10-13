@@ -39,6 +39,17 @@ class CreateTagView(CreateView):
     success_url = reverse_lazy("tasks:tag-list")
 
 
+class UpdateTagView(UpdateView):
+    model = Tag
+    form_class = TagForm
+    success_url = reverse_lazy("tasks:tag-list")
+
+
+class DeleteTagView(DeleteView):
+    model = Tag
+    success_url = reverse_lazy("tasks:tag-list")
+
+
 class ToggleTaskView(View):
     def post(self, request, pk):
         task = get_object_or_404(Task, pk=pk)
