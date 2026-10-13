@@ -17,6 +17,7 @@ class CreateTaskView(CreateView):
     form_class = TaskForm
     success_url = reverse_lazy("tasks:task-list")
 
+
 class UpdateTaskView(UpdateView):
     model = Task
     form_class = TaskForm
@@ -56,6 +57,3 @@ class ToggleTaskView(View):
         task.done = not task.done
         task.save(update_fields=["done"])
         return redirect("tasks:task-list")
-
-
-
