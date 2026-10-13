@@ -7,6 +7,7 @@ from tasks.models import Task
 
 class ListTaskView(ListView):
     model = Task
+    queryset = Task.objects.prefetch_related("tags").order_by("done", "-datetime")
 
 
 class CreateTaskView(CreateView):

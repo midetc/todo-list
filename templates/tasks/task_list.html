@@ -6,5 +6,34 @@
 
 {% block content %}
   <h1>Todo list <a href="{% url 'tasks:task-create' %}" class="btn-primary">Add</a></h1>
-  
+  {% for task in task_list %}
+    <article class="mb-4">
+      <p class="mb-1">
+        <strong>{{ task.content }}</strong>
+        {% if task.done %}
+          <strong class="text-success">Done</strong>
+        {% else %}
+          <strong class="text-danger">Not done</strong>
+        {% endif %}
+      </p>
+      <p class="text-secondary mb-1">
+        Created: {{ task.datetime|date:"F j, Y, g:i a" }}
+      </p>
+      {% if task.deadline %}
+        <p class="text-secondary mb-1">
+          Deadline: {{ task.deadline|date:"F j, Y, g:i a" }}
+        </p>
+      {% endif %}
+      <p class="text-secondary mb-1">
+        Tags:
+        {% for tag in task.tags.all %}
+          {{ tag.name }}
+        {% empty %}
+          —
+        {% endfor %}
+      </p>
+    </article>
+  {% empty %}
+    <p>No tasks yet.</p>
+  {% endfor %}
 {% endblock %}
