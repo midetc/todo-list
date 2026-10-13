@@ -31,6 +31,8 @@
         {% empty %}
           —
         {% endfor %}
+        <a href="{% url 'tasks:task-update' task.pk %}">Update</a>
+        <a href="{% url 'tasks:task-delete' task.pk %}">Delete</a>
       </p>
     </article>
   {% empty %}
